@@ -3,13 +3,14 @@ import Skeleton from "../components/PizzaBlock/Skeleton";
 import Sort, { sortList } from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import qs from 'qs'
-import axios from "axios";
 import { useState, useEffect, useContext, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Pagination from "../components/Pagination";
 import { SearchContext } from "../App";
 import { getCurrentPage, getItemsOnPage, getSortBehave, getSortData, getSortProperty, setFilters } from "../features/filter/filterSlice";
+import { fetchPizzas, getPizzas, getStatus } from "../features/fetchPizzas/fetchSlice";
+import FetchError from "../components/FetchError";
 
 
 const Home = ({firstRender}) => {
@@ -26,30 +27,19 @@ const Home = ({firstRender}) => {
 
   const { searchValue } = useContext(SearchContext)
 
-  const [items, setItems] = useState([]);
+  const items = useSelector( getPizzas )
   const [pizzaData, setPizzaData] = useState([])
-  const [loaded, setLoaded] = useState(true);
+  const loaded = useSelector( getStatus )
   const [totalPage, setTotalPage] = useState(1)
 
 
 
-  const getData = useCallback(async ()=>{
-    setLoaded(true);
-    try {
+   const getData = useCallback( ()=>{
       const queryCategory = categoryId !== 0 ? `category=${categoryId}` : "";
       const querySort = `&sortBy=${sortId.sortProperty}`;
-      const { data } = await axios.get(
-        "https://62c867ac8c90491c2cb52f2d.mockapi.io/items?" +
-          queryCategory +
-          querySort +
-          `&order=${sortBehave ? "desc" : "asc"}`
-      );
-      setItems(data);
-      setLoaded(false);
-    } catch (err) { 
-      console.log("Не смогли загрузить пиццу (");
-    }
-  },[categoryId, sortId, sortBehave])
+      dispatch( fetchPizzas({querySort, queryCategory, sortBehave}) )
+
+  },[categoryId, sortId, sortBehave,dispatch])
 
   useEffect(()=>{
     if(!firstRender.current){
@@ -66,17 +56,11 @@ const Home = ({firstRender}) => {
   },[categoryId, sortId, sortBehave, currentPage,navigate,firstRender])
 
 
-
-
-  
-
   useEffect(() => {
     if (!isSearch){
-      console.log(firstRender.current)
       !firstRender.current && getData();
       !firstRender.current && console.log('second')
     } 
-    console.log('render chanced on false')
     setIsSearch(false)
     window.scrollTo(0, 0);
   }, [categoryId, sortId, sortBehave, dispatch,getData, isSearch, firstRender ,sortName]);
@@ -122,21 +106,21 @@ const Home = ({firstRender}) => {
           name:name,
         }))
         setIsSearch(false)
-        console.log('changed')
       }
     },[dispatch])
 
   return (
     <>
       <div className="content__top">
-        <Categories/>
-        <Sort/>
+        <Categories />
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">{loaded ? skeletonData : pizzaData}</div>
-      <Pagination
-        totalPage={totalPage}
-      />
+      {loaded==='error' &&<FetchError /> }
+      <div className="content__items">
+        {loaded === "loading" ? skeletonData : loaded === 'success' && pizzaData}
+      </div>
+      <Pagination totalPage={totalPage} />
     </>
   );
 };
