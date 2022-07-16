@@ -1,0 +1,33 @@
+.pageList{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    li{
+        cursor: pointer;
+        margin-right: 10px;
+    }
+    .pagination{
+        margin-right: 10px;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover{
+            transform: scale(1.1);
+            border: 1px solid #fe5f1e;
+            .active{
+                background-color: white;
+            }
+        }
+    }
+    .active{
+        border: 1px solid #fe5f1e;
+        transition: transform 0.1s ease-in-out;
+        &:hover{
+            transform: scale(1.1);
+        }
+    }
+}
