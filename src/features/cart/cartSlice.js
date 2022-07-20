@@ -47,6 +47,7 @@ export const cartSlice = createSlice({
 export const getPizzas = (state) => state.cart.pizzas 
 export const getTotalBuy = (state) =>state.cart.pizzas.length
 export const getTotalPrice = (state) =>state.cart.totalPrice
+export const getCountPizzaById = (id) => (state)=> state.cart.pizzas.find(pizza => pizza.id === id)?.count || 0
 export const { setPizza, addCount, removeCount,clearCart,deletePizza } = cartSlice.actions
 
 

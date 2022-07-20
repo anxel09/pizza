@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import { getPizzas, setPizza } from "../../features/cart/cartSlice";
 
 function PizzaBlock({
@@ -18,6 +19,8 @@ function PizzaBlock({
   const pizzaTypes = ['Тонкое', 'Традиционное']
   const pizzas = useSelector( getPizzas )
   const countPizza = pizzas.find(pizza => pizza.id === id)?.count || 0
+  const {pathname} = useLocation()
+
   const handleAddBtn = () => {
     dispatch(
       setPizza({
@@ -42,11 +45,13 @@ function PizzaBlock({
   return (
     <div className="pizza-block-wrapper">
       <div className="pizza-block">
-      <img
-        className="pizza-block__image"
-        src={imageUrl}
-        alt="Pizza"
-      />
+      <Link to={pathname === '/' ? `pizza/${id}` : '#'} style={pathname !== '/' ? {pointerEvents: 'none'} : {}}>
+        <img
+          className="pizza-block__image"
+          src={imageUrl}
+          alt="Pizza"
+        />
+      </Link>
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
