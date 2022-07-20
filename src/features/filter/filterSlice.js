@@ -1,14 +1,14 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {createSlice} from "@reduxjs/toolkit"
 
 const initialState ={
-    itemsOnPage:4,
-    categoryId:0,
-    currentPage:1,
-    sort:{
-        name:'популярности',
-        sortProperty: 'rating',
-        sortBehave: true,
-    }
+  itemsOnPage:4,
+  categoryId:0,
+  currentPage:1,
+  sort:{
+    name:"популярности",
+    sortProperty: "rating",
+    sortBehave: true,
+  }
 }
 
 export const filterSlice = createSlice({

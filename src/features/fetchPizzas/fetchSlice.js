@@ -4,22 +4,22 @@ import axios from "axios";
 const initialState = {
   pizzas: [],
   pizzaById:{},
-  status: 'loading' // loading | success | error
+  status: "loading" // loading | success | error
 };
 
 export const fetchPizzas = createAsyncThunk("pizzas/fetchPizzas",
-     async (params) => {
-        const { queryCategory, querySort, sortBehave } = params
-        const { data } = await axios.get(
-            "https://62c867ac8c90491c2cb52f2d.mockapi.io/items?" +
+  async (params) => {
+    const { queryCategory, querySort, sortBehave } = params
+    const { data } = await axios.get(
+      "https://62c867ac8c90491c2cb52f2d.mockapi.io/items?" +
             queryCategory +
             querySort +
             `&order=${sortBehave ? "desc" : "asc"}`
-        );
-        return data 
-});
+    );
+    return data 
+  });
 
-export const fetchPizzaById = createAsyncThunk('pizzas/getPizzaById',
+export const fetchPizzaById = createAsyncThunk("pizzas/getPizzaById",
   async (id,{rejectWithValue}) =>{
     try{
       const {data} = await axios.get(
@@ -28,10 +28,10 @@ export const fetchPizzaById = createAsyncThunk('pizzas/getPizzaById',
       if(data.length < 1){
         return rejectWithValue({})
       }
-    return data
+      return data
 
     }catch(err){
-      console.log('Не смогли найти пиццу!')
+      console.log("Не смогли найти пиццу!")
     }
   }
 )
@@ -48,28 +48,28 @@ export const pizzaSlice = createSlice({
   },
   extraReducers:{
     [fetchPizzas.pending]: (state)=>{
-      state.status = 'loading' 
+      state.status = "loading" 
       state.items = []
     },
     [fetchPizzas.fulfilled]: (state,action) =>{
-        state.pizzas = action.payload
-        state.status = 'success'
+      state.pizzas = action.payload
+      state.status = "success"
     },
     [fetchPizzas.rejected]: (state) =>{
-      state.status = 'error'
+      state.status = "error"
       state.items  = []
     },
     [fetchPizzaById.pending]: (state) =>{
-      state.status = 'loading'
+      state.status = "loading"
       state.pizzaById = {}
     },
     [fetchPizzaById.fulfilled]: (state,action) =>{
-      state.status = 'success'
+      state.status = "success"
       state.pizzaById = action.payload
     },
     [fetchPizzaById.rejected]: (state) =>{
       state.pizzaById  = {}
-      state.status = 'error'
+      state.status = "error"
     },
   }
 });

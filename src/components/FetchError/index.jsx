@@ -1,13 +1,13 @@
-import style from './FetchError.module.scss'
-import React from 'react'
+import style from "./FetchError.module.scss"
+import React from "react"
 
 
 const FetchError = () => {
   return (
     <div className={style.errorWrapper}>
-        <h2>
+      <h2>
             Ошибка в получении пицц, попробуйте обновить страницу!
-        </h2> 
+      </h2> 
     </div>
   )
 }

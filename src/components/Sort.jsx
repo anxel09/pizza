@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { getSortData, setSortData, getSortBehave, setSortBehave } from "../features/filter/filterSlice";
 import { useDispatch,useSelector } from "react-redux";
@@ -27,9 +28,9 @@ export default function Sort() {
     <div className="sort">
       <div className="sort__label">      
         <svg
-        style={{cursor:'pointer',
-        transform:`rotateX(${sortBehave? 180 : 0}deg)`
-      }}
+          style={{cursor:"pointer",
+            transform:`rotateX(${sortBehave? 180 : 0}deg)`
+          }}
           onClick={()=>dispatch(setSortBehave())}
           width="10"
           height="6"

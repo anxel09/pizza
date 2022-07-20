@@ -1,3 +1,4 @@
+import React from "react";
 import { useMemo, useContext, useRef, useState, useCallback } from "react";
 import { SearchContext } from "../../App";
 import style from "./Search.module.scss";
@@ -7,7 +8,7 @@ import { setCurrentPage } from "../../features/filter/filterSlice";
 
 export default function Search() {
   const dispatch = useDispatch()
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState("")
 
   const { setSearchValue } = useContext(SearchContext)
 
@@ -15,12 +16,11 @@ export default function Search() {
 
   function onClickClear (){
     setTimeout(() => {
-      setInputValue('')
+      setInputValue("")
       setSearchValue("")
       inputRef.current.focus()
     }, 110);
   }
-
 
   const getSearchData = useMemo(
     () => debounce((str) => {

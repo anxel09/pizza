@@ -1,13 +1,13 @@
 import "./App.css";
 import "./scss/app.scss";
-import Header from "./components/Header";
+import Header from "./components/Header.jsx";
 
 import { Route, Routes } from "react-router-dom";
-import { createContext, useState,useRef } from "react";
-import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
-import Cart from "./pages/Cart";
-import FullPizza from "./pages/FullPizza";
+import React, { createContext, useState,useRef } from "react";
+import Home from "./pages/Home.jsx";
+import NotFound from "./pages/NotFound.jsx";
+import Cart from "./pages/Cart.jsx";
+import FullPizza from "./pages/FullPizza/index.jsx";
 
 export const SearchContext = createContext()
 

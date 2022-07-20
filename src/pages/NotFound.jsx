@@ -1,9 +1,10 @@
-import NotFoundBlock from "../components/NotFoundBlock";
+import React from "react";
+import NotFoundBlock from "../components/NotFoundBlock/index.jsx";
 
 export default function NotFound(){
-    return(
-        <>
-            <NotFoundBlock/>
-        </>
-    )
+  return(
+    <>
+      <NotFoundBlock/>
+    </>
+  )
 }

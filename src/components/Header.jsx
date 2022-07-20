@@ -1,8 +1,10 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearFilters } from "../features/filter/filterSlice";
 import { Link, useLocation } from "react-router-dom";
-import Search from "./Search";
+import Search from "./Search/index.jsx";
 import { getTotalBuy, getTotalPrice } from "../features/cart/cartSlice";
+
 function Header({firstRender}) {
   const dispatch = useDispatch()
   const totalBuy = useSelector(getTotalBuy)
@@ -16,11 +18,10 @@ function Header({firstRender}) {
     
   }
 
-
   return (
     <>
       <div className="header">
-        <div className="container" style={ pathname === '/cart' ? {justifyContent:'center', textAlign:'center'} : {}}>
+        <div className="container" style={pathname === "/cart" ? {justifyContent:"center", textAlign:"center"} : {}}>
           <Link onClick={onClickLogo} to="/">
             <img width="38" src="/img/pizza-logo.svg" alt="PizzaLogo" />
             <div className="header__logo">

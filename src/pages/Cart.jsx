@@ -1,6 +1,7 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import CartItem from "../components/CartItem";
+import CartItem from "../components/CartItem/index.jsx";
 import { clearCart, getPizzas, getTotalBuy, getTotalPrice } from "../features/cart/cartSlice";
 
 export default function Cart() {
@@ -144,20 +145,20 @@ export default function Cart() {
             </div>
           </div>
         </div>
-    </div>
-    :
-    <div className="container container--cart">
-      <div className="cart cart--empty">
-        <h2>Корзина пустая 😕</h2>
-        <p>
+      </div>
+      :
+      <div className="container container--cart">
+        <div className="cart cart--empty">
+          <h2>Корзина пустая 😕</h2>
+          <p>
           Вероятней всего, вы не заказывали ещё пиццу.<br />
           Для того, чтобы заказать пиццу, перейди на главную страницу.
-        </p>
-        <img src="/img/empty-cart.png" alt="Empty cart" />
-        <Link to="/" className="button button--black">
-          <span>Вернуться назад</span>
-        </Link>
+          </p>
+          <img src="/img/empty-cart.png" alt="Empty cart" />
+          <Link to="/" className="button button--black">
+            <span>Вернуться назад</span>
+          </Link>
+        </div>
       </div>
-    </div>
   );
 }
