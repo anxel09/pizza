@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
@@ -18,7 +18,17 @@ function PizzaBlock({
   const pizzaTypes = ["Тонкое", "Традиционное"]
   const pizzas = useSelector( getPizzas )
   const countPizza = pizzas.find(pizza => pizza.id === id)?.count || 0
+  const firstRender = useRef(true)
   const {pathname} = useLocation()
+
+  React.useEffect(()=>{
+    if(!firstRender.current){
+      localStorage.setItem("pizza",JSON.stringify(pizzas))
+    }
+    firstRender.current = false
+  },[pizzas])
+
+
 
   const handleAddBtn = () => {
     dispatch(

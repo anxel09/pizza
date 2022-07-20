@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux"; 
 import { addCount, deletePizza, removeCount } from "../../features/cart/cartSlice";
 
-export default function CartItem({index,imageUrl,count,price,title,type,size}) {
+export default function CartItem({index,imageUrl,count,price,title,type,size,pizzas}) {
   const dispatch = useDispatch()
 
   function handleClickAdd(){
@@ -16,6 +16,10 @@ export default function CartItem({index,imageUrl,count,price,title,type,size}) {
   function handleRemovePizza(){
     dispatch( deletePizza({index,count}) )
   }
+
+  React.useEffect(()=>{
+    localStorage.setItem("pizza",JSON.stringify(pizzas))
+  },[pizzas])
 
   return (
     <div className="cart__item">

@@ -19,7 +19,7 @@ export default function Search() {
       setInputValue("")
       setSearchValue("")
       inputRef.current.focus()
-    }, 110);
+    }, 110); 
   }
 
   const getSearchData = useMemo(

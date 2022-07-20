@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem/index.jsx";
@@ -15,6 +15,9 @@ export default function Cart() {
     dispatch( clearCart() )
   }
 
+  useEffect(()=>{
+    localStorage.setItem("pizza",JSON.stringify(pizzas))
+  },[pizzas])
 
   return (
     totalBuy ? 
@@ -100,6 +103,7 @@ export default function Cart() {
               pizzas.map((pizza,index) =>(
                 <CartItem
                   key={pizza.id}
+                  pizzas={pizzas}
                   {...pizza}
                   index = {index}
                 />

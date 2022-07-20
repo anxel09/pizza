@@ -33,14 +33,13 @@ const Home = ({firstRender}) => {
   const loaded = useSelector( getStatus )
   const [totalPage, setTotalPage] = useState(1)
 
-
-
   const getData = useCallback( ()=>{
     const queryCategory = categoryId !== 0 ? `category=${categoryId}` : "";
     const querySort = `&sortBy=${sortId.sortProperty}`;
     dispatch( fetchPizzas({querySort, queryCategory, sortBehave}) )
 
   },[categoryId, sortId, sortBehave,dispatch])
+
 
   useEffect(()=>{
     if(!firstRender.current){

@@ -1,8 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit"
+import { getPizzaFromLS } from "../../utils/getPizzaFromLS";
+import { setTotalPrice } from "../../utils/setTotalPrice";
 
 const initialState ={
-  totalPrice:0,
-  pizzas:[],
+  totalPrice:setTotalPrice(),
+  pizzas: getPizzaFromLS(),
 }
 
 export const cartSlice = createSlice({
